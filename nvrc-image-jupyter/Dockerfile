@@ -3,8 +3,7 @@ FROM nvcr.io/nvidia/pytorch:23.12-py3
 # Use a specific working directory
 WORKDIR /app
 
-# Copy only necessary files
-COPY requirements.txt ./
+
 COPY install_git_and_lfs.sh ./
 
 # Make the git installation script executable and run it
