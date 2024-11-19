@@ -16,6 +16,7 @@ EXPOSE 8001
 EXPOSE 8002
 
 # Default token can be overridden at runtime with -e JUPYTER_TOKEN=yourpassword
+
 ENV JUPYTER_TOKEN=default_password
 
 CMD ["/bin/sh", "-c", "jupyter lab --LabApp.token='${JUPYTER_TOKEN}' --LabApp.ip='0.0.0.0' --LabApp.allow_root=True"]
