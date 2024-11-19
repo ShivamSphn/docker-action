@@ -26,7 +26,7 @@ EXPOSE 8888 8000 8001 8002
 
 
 # Entrypoint script for more flexible configuration
-COPY entrypoint.sh /entrypoint.sh
+COPY start.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
