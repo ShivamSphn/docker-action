@@ -24,9 +24,6 @@ COPY . .
 # Expose Jupyter and potential service ports
 EXPOSE 8888 8000 8001 8002
 
-# Security: Require token at runtime, default to empty
-ENV JUPYTER_TOKEN=""
-
 # Entrypoint script for more flexible configuration
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
