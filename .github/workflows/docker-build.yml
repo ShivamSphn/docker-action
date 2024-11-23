@@ -24,13 +24,26 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - name: Generate version tags
+        id: tags
+        run: |
+          # Get current date in YYYYMMDD format
+          DATE_TAG=$(date +'%Y%m%d')
+          # Get short SHA
+          SHA_TAG=$(echo ${{ github.sha }} | cut -c1-7)
+          # Load version prefix from .env
+          VERSION_PREFIX=$(grep VERSION_PREFIX .env | cut -d '=' -f2)
+          # Create tag list
+          TAGS="${{ secrets.DOCKERHUB_USERNAME }}/nvrc-jupyter:latest,${{ secrets.DOCKERHUB_USERNAME }}/nvrc-jupyter:${VERSION_PREFIX}${DATE_TAG},${{ secrets.DOCKERHUB_USERNAME }}/nvrc-jupyter:${VERSION_PREFIX}${SHA_TAG}"
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+
       - name: Build and push NVRC Jupyter Docker image
         uses: docker/build-push-action@v6.7.0
         with:
           context: ./nvrc-image-jupyter
           file: ./nvrc-image-jupyter/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nvrc-jupyter:latest
+          tags: ${{ steps.tags.outputs.tags }}
 
   triton-jupyter:
     runs-on: self-hosted
@@ -47,10 +60,23 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - name: Generate version tags
+        id: tags
+        run: |
+          # Get current date in YYYYMMDD format
+          DATE_TAG=$(date +'%Y%m%d')
+          # Get short SHA
+          SHA_TAG=$(echo ${{ github.sha }} | cut -c1-7)
+          # Load version prefix from .env
+          VERSION_PREFIX=$(grep VERSION_PREFIX .env | cut -d '=' -f2)
+          # Create tag list
+          TAGS="${{ secrets.DOCKERHUB_USERNAME }}/triton-jupyter:latest,${{ secrets.DOCKERHUB_USERNAME }}/triton-jupyter:${VERSION_PREFIX}${DATE_TAG},${{ secrets.DOCKERHUB_USERNAME }}/triton-jupyter:${VERSION_PREFIX}${SHA_TAG}"
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+
       - name: Build and push Triton Jupyter Docker image
         uses: docker/build-push-action@v6.7.0
         with:
           context: ./triton-image-jupyter
           file: ./triton-image-jupyter/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/triton-jupyter:latest
+          tags: ${{ steps.tags.outputs.tags }}

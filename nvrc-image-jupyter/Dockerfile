@@ -21,9 +21,8 @@ RUN git clone https://github.com/NVIDIA/TensorRT-LLM.git
 RUN pip install --no-cache-dir \
     protobuf==4.24.4 \
     SentencePiece==0.1.99 \
-    jupyterlab==4.0.9 \
-    openmpi-bin \
-    libopenmpi-deva
+    jupyterlab==4.0.9 
+
     
 RUN pip install tensorrt_llm -U --pre --extra-index-url https://pypi.nvidia.com
 RUN pip install -r TensorRT-LLM/examples/bloom/requirements.txt
