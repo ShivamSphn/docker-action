@@ -44,8 +44,6 @@ jobs:
           file: ./nvrc-image-jupyter/Dockerfile
           push: true
           tags: ${{ steps.tags.outputs.tags }}
-          cache-from: type=registry,ref=user/app:buildcache
-          cache-to: type=registry,ref=user/app:buildcache,mode=max
 
   # triton-jupyter:
   #   runs-on: self-hosted
