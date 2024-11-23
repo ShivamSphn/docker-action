@@ -9,7 +9,7 @@ COPY install_git_and_lfs.sh ./
 # Make the git installation script executable and run it
 RUN chmod +x install_git_and_lfs.sh && \
     ./install_git_and_lfs.sh
-
+RUN git clone https://github.com/NVIDIA/TensorRT-LLM.git
 # Install Python dependencies with version pinning
 RUN pip install --no-cache-dir \
     protobuf==4.24.4 \
