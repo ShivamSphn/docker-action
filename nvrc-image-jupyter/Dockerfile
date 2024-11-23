@@ -13,12 +13,17 @@ RUN chmod +x install_git_and_lfs.sh && \
 RUN curl https://rclone.org/install.sh |  bash
 RUN apt update && apt install gdu btop -y && apt autoclean -y && apt autoremove -y
 RUN git clone https://github.com/NVIDIA/TensorRT-LLM.git
+
 # Install Python dependencies with version pinning
 # RUN apt update && apt full-upgrade -y && apt install gdu btop -y && apt autoclean -y && apt autoremove -y
+
+
 RUN pip install --no-cache-dir \
     protobuf==4.24.4 \
     SentencePiece==0.1.99 \
     jupyterlab==4.0.9
+RUN pip install tensorrt_llm -U --pre --extra-index-url https://pypi.nvidia.com
+RUN pip install -r TensorRT-LLM/examples/bloom/requirements.txt
 
 # Copy the rest of the application
 COPY . .
