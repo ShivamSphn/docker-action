@@ -12,7 +12,7 @@ source /app/.venv/bin/activate
 
 # Set virtual environment as default kernel
 jupyter kernelspec list
-python -m ipykernel install --user --name=.venv --display-name="TensorRT-LLM Environment" --sys-prefix
+python -m ipykernel install --name=.venv --display-name="TensorRT-LLM Environment" --sys-prefix
 
 # Start Jupyter Lab with the provided token
 exec jupyter lab \

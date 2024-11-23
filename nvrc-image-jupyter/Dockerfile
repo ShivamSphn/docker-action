@@ -32,7 +32,7 @@ RUN . /app/.venv/bin/activate && \
 
 # Set up the virtual environment as a Jupyter kernel
 RUN . /app/.venv/bin/activate && \
-    python -m ipykernel install --user --name=.venv --display-name="TensorRT-LLM Environment"
+    python -m ipykernel install --name=.venv --display-name="TensorRT-LLM Environment" --sys-prefix
 
 # Copy the rest of the application
 COPY . .
