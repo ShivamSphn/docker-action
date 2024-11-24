@@ -52,6 +52,7 @@ Each image is tagged with three different versions:
 ### Required Environment Variables
 
 - `JUPYTER_TOKEN`: Required for security. Set this to a secure token of your choice.
+- `HUGGINGFACE_TOKEN`: Required for Hugging Face model access. Set this to your Hugging Face API token.
 
 ### Running the Containers
 
@@ -61,18 +62,21 @@ To use a specific version of an image:
 # Run the latest version
 docker run -it \
     -e JUPYTER_TOKEN=your_secure_token \
+    -e HUGGINGFACE_TOKEN=your_huggingface_token \
     -p 8888:8888 -p 8000:8000 -p 8001:8001 -p 8002:8002 \
     shivamsphn/nvrc-jupyter:latest
 
 # Run a specific date version
 docker run -it \
     -e JUPYTER_TOKEN=your_secure_token \
+    -e HUGGINGFACE_TOKEN=your_huggingface_token \
     -p 8888:8888 -p 8000:8000 -p 8001:8001 -p 8002:8002 \
     shivamsphn/nvrc-jupyter:v20241123
 
 # Run a specific commit version
 docker run -it \
     -e JUPYTER_TOKEN=your_secure_token \
+    -e HUGGINGFACE_TOKEN=your_huggingface_token \
     -p 8888:8888 -p 8000:8000 -p 8001:8001 -p 8002:8002 \
     shivamsphn/nvrc-jupyter:vf93210a
 ```
@@ -100,4 +104,5 @@ The following ports are exposed:
 
 ## Security Note
 
-Always set a secure JUPYTER_TOKEN when running the containers. Never use default or easily guessable tokens in production environments.
+- Always set a secure JUPYTER_TOKEN when running the containers. Never use default or easily guessable tokens in production environments.
+- The HUGGINGFACE_TOKEN should be kept secure and not shared publicly. This token is used to authenticate with Hugging Face's model hub and is automatically configured during container startup.

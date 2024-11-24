@@ -23,8 +23,9 @@ RUN . /app/.venv/bin/activate && pip install --no-cache-dir \
     protobuf==4.24.4 \
     SentencePiece==0.1.99 \
     jupyterlab==4.0.9 \
-    ipykernel
-
+    ipykernel \
+    "huggingface_hub[cli]"
+    
 # Install TensorRT and other dependencies in virtual environment
 RUN . /app/.venv/bin/activate && \
     pip install tensorrt_llm -U --pre --extra-index-url https://pypi.nvidia.com && \

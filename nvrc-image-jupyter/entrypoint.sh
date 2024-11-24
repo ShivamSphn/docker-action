@@ -7,6 +7,14 @@ if [ -z "$JUPYTER_TOKEN" ]; then
     exit 1
 fi
 
+# Check and login to Hugging Face if token is provided
+if [ -n "$HUGGINGFACE_TOKEN" ]; then
+    echo "Logging in to Hugging Face..."
+    huggingface-cli login --token "$HUGGINGFACE_TOKEN"
+else
+    echo "Warning: HUGGINGFACE_TOKEN not set. Some features might be limited."
+fi
+
 # Activate virtual environment
 source /app/.venv/bin/activate
 
