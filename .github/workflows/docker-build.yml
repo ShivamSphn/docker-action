@@ -10,7 +10,7 @@ on:
 
 jobs:
   nvrc-jupyter:
-    runs-on: self-hosted
+    runs-on: spheron
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
