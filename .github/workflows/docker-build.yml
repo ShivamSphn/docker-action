@@ -76,7 +76,7 @@ jobs:
       - name: Build and push SGLang Server Docker image
         uses: docker/build-push-action@v6.7.0
         with:
-          context: ./sg-lang-login
+          context: ./sglang-login
           file: ./sglang-login/Dockerfile
           push: true
           tags: ${{ steps.tags.outputs.tags }}
