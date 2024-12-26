@@ -70,14 +70,14 @@ jobs:
           # Load version prefix from .env
           VERSION_PREFIX=$(grep VERSION_PREFIX .env | cut -d '=' -f2)
           # Create tag list
-          TAGS="${{ secrets.DOCKERHUB_USERNAME }}/sglang-server:latest,${{ secrets.DOCKERHUB_USERNAME }}/sglang-server:${VERSION_PREFIX}${DATE_TAG},${{ secrets.DOCKERHUB_USERNAME }}/sglang-server:${VERSION_PREFIX}${SHA_TAG}"
+          TAGS="${{ secrets.DOCKERHUB_USERNAME }}/sglang-login:latest,${{ secrets.DOCKERHUB_USERNAME }}/sglang-login:${VERSION_PREFIX}${DATE_TAG},${{ secrets.DOCKERHUB_USERNAME }}/sglang-login:${VERSION_PREFIX}${SHA_TAG}"
           echo "tags=${TAGS}" >> $GITHUB_OUTPUT
 
       - name: Build and push SGLang Server Docker image
         uses: docker/build-push-action@v6.7.0
         with:
           context: ./sg-lang-login
-          file: ./sg-lang-login/Dockerfile
+          file: ./sglang-login/Dockerfile
           push: true
           tags: ${{ steps.tags.outputs.tags }}
 
