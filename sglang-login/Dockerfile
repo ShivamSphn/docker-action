@@ -7,7 +7,7 @@ RUN chmod +x install_git_and_lfs.sh && \
 
 RUN curl https://rclone.org/install.sh |  bash
 
-RUN apt update && apt install gdu btop python3-venv -y && apt autoclean -y && apt autoremove -y
+RUN apt update && apt install python3-venv -y && apt autoclean -y && apt autoremove -y
 
 # Virtual environment setup (commented out)
 # RUN python -m venv /app/.venv
