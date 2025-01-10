@@ -1,6 +1,4 @@
-Here's a README.md for the deployment configuration:
 
-```markdown
 # LLM Server Deployment Configuration
 
 This document describes the key environment variables used to configure the LLM server deployment.
@@ -103,13 +101,3 @@ docker run -e SGLANG_MODEL="mistralai/Mistral-7B-v0.1" \
 - CUDA-compatible GPUs
 - Docker with GPU support
 - Sufficient GPU memory for model and parallelization
-```
-
-This README provides:
-1. Structured documentation of all parameters
-2. Example configurations for different use cases
-3. Performance recommendations
-4. Important notes for deployment
-5. Clear tables for each category of settings
-
-Would you like me to expand on any particular section?
