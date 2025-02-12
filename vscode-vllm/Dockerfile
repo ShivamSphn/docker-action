@@ -29,7 +29,6 @@ RUN useradd -m -s /bin/bash coder && \
 
 # Install PyTorch with CUDA support
 # RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Set environment variables
 ENV PUID=0
@@ -37,6 +36,7 @@ ENV PGID=0
 ENV TZ=Etc/UTC
 ENV PASSWORD=Hello2us@
 ENV DEFAULT_WORKSPACE=/config/workspace
+ENV PATH="/home/coder/.local/bin:${PATH}"
 
 # Update user permissions to match PUID/PGID
 RUN groupmod -o -g $PGID coder && \
@@ -51,9 +51,13 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 USER coder
 WORKDIR ${DEFAULT_WORKSPACE}
 
+# Install uv as coder user
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
+    echo 'source ~/.local/bin/env' >> ~/.bashrc
+
 # Expose code-server port
 EXPOSE 8080
 EXPOSE 8000
 
 # Start code-server with password authentication
-CMD ["sh", "-c", "code-server --bind-addr 0.0.0.0:8080 --auth password"] 
+CMD ["sh", "-c", "code-server --bind-addr 0.0.0.0:8080 --auth password"]
