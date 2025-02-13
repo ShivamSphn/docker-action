@@ -5,7 +5,8 @@ FROM nvidia/cuda:12.8.0-cudnn-devel-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y  \
+    zsh \
     python3 \
     python3-pip \
     git \
@@ -18,6 +19,11 @@ RUN apt-get update && apt-get install -y \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip
 
+RUN chmod +x install_git_and_lfs.sh && \
+    ./install_git_and_lfs.sh
+
+RUN curl https://rclone.org/install.sh |  bash
+RUN apt update && apt install gdu btop python3-venv -y && apt autoclean -y && apt autoremove -y
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
