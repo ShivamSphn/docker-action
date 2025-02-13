@@ -60,7 +60,7 @@ WORKDIR ${DEFAULT_WORKSPACE}
 # Install uv as coder user
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
     echo 'source ~/.local/bin/env' >> ~/.bashrc
-
+RUN uv pip install vllm --extra-index-url https://wheels.vllm.ai/nightly
 # Expose code-server port
 EXPOSE 8080
 EXPOSE 8000
